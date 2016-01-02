@@ -1,0 +1,17 @@
+{
+    "contents" : "objFun <- function(x) {\n  return (x^2 + 9 * x + 8)\n}\n\ngenFun <- function(t) {\n  return (rnorm(1, sd = abs(t)))\n}\n\naccptFun <- function(delE, t) {\n  return(1/(1+exp(delE/t)))\n}\n\nx <- rnorm(1, sd = 1000)\nt <- 10000\nE <- objFun(x)\niter <- 1\nError <- c(E)\ndelE <- 1000\n\nwhile(abs(delE) > 0.01){\n  delx <- genFun(t)\n  newX <- x + delx\n  newE <- objFun(newX)\n  \n  rand <- runif(1, min = 0, max = 1)\n  acpt <- accptFun(newE - E, t)\n  #cat(\"Rand: \", rand, \", Acpt: \", acpt, \"\\n\")\n  \n  if(rand <= acpt) {\n    delE <- newE - E\n    \n    cat(\"Iteration: \", iter, \"Temp: \", t, \"\\n\")\n    cat(\"X: \", x, \"Del X: \", delx, \", New X: \", newX, \"\\n\")\n    cat(\"E: \", E, \"Del E: \", delE, \", New E: \", newE, \"\\n\")\n    cat(\"\\n\\n\")\n    \n    E <- newE\n    x <- newX\n    t <- t * 0.8\n    iter <- iter + 1\n    Error[iter] = E\n    #cat(\"Update!!!\")\n  }\n}\n\nplot(1:iter, Error, xlab = \"Iterations\", ylab = \"Objective Function\", type = \"l\")\n",
+    "created" : 1451721473473.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2477613076",
+    "id" : "5DF1230",
+    "lastKnownWriteTime" : 1451721315,
+    "path" : "~/SA/sa.R",
+    "project_path" : "sa.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
