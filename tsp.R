@@ -1,3 +1,4 @@
+# to set random distances between all cities
 genDist <- function(ncities) {
   dist <- matrix(data = sample(1:((ncities^2)*10), ncities^2), nrow = ncities, ncol = ncities)
   
@@ -11,6 +12,7 @@ genDist <- function(ncities) {
   return (dist)
 }
 
+# compute the total distance given the ordering of the cities in the path
 distance <- function(order) {
   total_distance <- 0
   
@@ -22,6 +24,7 @@ distance <- function(order) {
   return (total_distance)
 }
 
+# swap two randomly picked cities in the ordering
 swap <- function(order) {
   indices <- sample(1:length(order), 2)
   temp = order[indices[1]]
@@ -30,10 +33,12 @@ swap <- function(order) {
   return(order)
 }
 
+# returns the probability with which a solution should be accepted
 accptFun <- function(delE, t) {
   return(1/(1+exp(delE/t)))
 }
 
+# Initialization
 t = 1e5
 ncities <- 30
 dist <- genDist(ncities = ncities)
