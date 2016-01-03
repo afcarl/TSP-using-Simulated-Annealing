@@ -33,6 +33,7 @@ server <- function(input, output) {
   E <- objFun(x)
   iter <- 1
   Error <- c(E)
+  
   delE <- 1000
   
   while(abs(delE) > 0.01){
@@ -53,11 +54,12 @@ server <- function(input, output) {
       
       E <- newE
       x <- newX
-      t <- t * 0.9
-      iter <- iter + 1
-      Error[iter] = E
+      
       
     }
+    t <- t * 0.9
+    iter <- iter + 1
+    Error[iter] = E
   }
   
   output$trainingPlot <- renderPlot({
