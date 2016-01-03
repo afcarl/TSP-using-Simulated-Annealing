@@ -10,8 +10,8 @@ accptFun <- function(delE, t) {
   return(1/(1+exp(delE/t)))
 }
 
-x <- rnorm(1, sd = 1000)
-t <- 10000
+x <- rnorm(1, sd = 10)
+t <- 100
 E <- objFun(x)
 iter <- 1
 Error <- c(E)
@@ -36,10 +36,10 @@ while(abs(delE) > 0.01){
     
     E <- newE
     x <- newX
-    t <- t * 0.8
+    t <- t * 0.9
     iter <- iter + 1
     Error[iter] = E
-    #cat("Update!!!")
+    
   }
 }
 

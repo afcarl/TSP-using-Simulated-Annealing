@@ -40,14 +40,15 @@ accptFun <- function(delE, t) {
 
 # Initialization
 t = 1e5
-ncities <- 30
+ncities <- 10
 dist <- genDist(ncities = ncities)
 order <- sample(x = 1:ncities)
 E <- distance(order = order)
 iter <- 1
 Error <- c(E)
 
-while(t > 1) {
+startTime <- proc.time()
+while(proc.time() - startTime < 1) {
   newOrder <- swap(order = order)
   newE <- distance(order = newOrder)
   
@@ -57,8 +58,8 @@ while(t > 1) {
   if(rand <= acpt) {
     delE <- newE - E
     
-    cat("Iteration: ", iter, "Temp: ", t, "\n")
-    #cat("Order: ", order, ", New Order: ", newOrder, "\n")
+    cat("Iteration: ", iter, ", Time: ", proc.time() - startTime, "Temperature: ", t, "\n")
+    cat("Order: ", order, ", New Order: ", newOrder, "\n")
     cat("Total Distance: ", E, "Del E: ", delE, ", New Total Distance: ", newE, "\n")
     cat("\n\n")
     
@@ -70,4 +71,4 @@ while(t > 1) {
   }
 }
 
-
+plot(1:iter, Error, xlab = "Iterations", ylab = "Total Distance", type = "l")
